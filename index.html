@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>append to sheet</h1>
+    <form action="" method="POST">
+      <input type="text" name="url" placeholder="url">
+      <input type="text" name="tags" placeholder="tags">
+      <button type="submit">Submit</button>
+    </form>
+    <h1>Current sheet</h1>
+    <table id="sheet"></table>
+    <script>
+        const table = document.getElementById("sheet")
+        fetch("/getRows").then((data) => {
+            data.json().then((rows) => {
+                rows.forEach(row => {
+                    const tr = document.createElement("tr")
+                    const id = document.createElement("td")
+                    id.innerHTML = row[0]
+                    tr.appendChild(id)
+                    const url = document.createElement("td")
+                    url.innerHTML = row[1]
+                    tr.appendChild(url)
+                    const tags = document.createElement("td")
+                    tags.innerHTML = row[2]
+                    tr.appendChild(tags)
+                    table.appendChild(tr)
+                });
+            })
+        })
+        
+    </script>
+  </body>
+</html>
